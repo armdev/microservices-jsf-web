@@ -1,0 +1,41 @@
+server:
+  port: 9090
+
+management:
+  security:
+    enabled: false
+
+zuul:
+  routes:
+    auth:
+      path: /auth/**
+      url: http://localhost:3000
+      sensitive-headers:
+    register:
+      path: /register/**
+      url: http://localhost:3001      
+    profile:
+      path: /profile/**
+      url: http://localhost:3002
+  
+spring:
+  application:
+    name: zuulweb
+
+auth:
+    ribbon:
+     ReadTimeout: 3000
+register:
+    ribbon:
+     ReadTimeout: 3000
+profile:
+    ribbon:
+     ReadTimeout: 3000
+
+security:
+  user:
+    password: none
+
+logging:
+  level:
+    org.springframework.security: DEBUG

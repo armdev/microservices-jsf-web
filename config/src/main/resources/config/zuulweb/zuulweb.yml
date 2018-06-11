@@ -30,7 +30,7 @@ spring:
   application:
     name: zuulweb   
   zipkin:
-    baseUrl: http://localhost:9411
+    baseUrl: ${ZIPKIN_URI:http://localhost:9411}
     enabled: true
   sleuth:
     enabled: true
@@ -38,7 +38,7 @@ spring:
     percentage: 1 
   cloud:
     config:
-      uri: http://localhost:8888                 
+      uri: ${CONFIG_URI:http://localhost:8888}               
 
 eureka:
   client:
@@ -46,6 +46,6 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: ${CONFIG_URI:http://localhost:8888}
     discovery:
         enabled: true

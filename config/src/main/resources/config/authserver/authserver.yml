@@ -25,24 +25,35 @@ spring:
     name: authserver
     profiles:
     active:
-      default  
+      default
+  boot:
+    admin:
+      client:
+        url: ${ADMIN_URI:http://localhost:9595}
+        username: admin       #These two are needed so that the client
+        password: admin   #can register at the protected server api
+        instance:
+          metadata:
+            user.name: admin         #These two are needed so that the server
+            user.password: admin #can access the protected client endpoints
+ 
 
   cloud:
     config:
-       name: authserver
-       uri: http://localhost:8888
+       name: authserver    
+       uri: ${CONFIG_URI:http://localhost:8888}
     discovery:
        service-id: config
        enabled: true
   data:
-    mongodb:    
-      uri: mongodb://localhost:27017/socnet    
+    mongodb:        
+      uri: ${MONGO_URI:mongodb://localhost:27017/socnet}
 
 jwt:
     header: Authorization
     expires_in: 600  
     mobile_expires_in: 600    
-    secret: ap163#$96@
+    secret: ananas
     
 hystrix:
   command:
@@ -55,8 +66,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 5000      
-
+            timeoutInMilliseconds: 5000
 
 eureka:
   instance:  
@@ -67,4 +77,4 @@ eureka:
     healthcheck:
       enabled: true
     serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+      defaultZone: ${EUREKA_URI:http://user:password@localhost:8761/eureka}

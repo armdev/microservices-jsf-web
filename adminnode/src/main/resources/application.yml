@@ -1,0 +1,38 @@
+server:
+    port: 9595
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+spring:
+  application:
+    name: adminnode
+#  boot:
+#    admin:
+#      client:
+#        url: http://localhost:9595
+  profiles:
+    active:
+      - default
+
+  security:
+    user:
+      name: admin
+      password: admin
+  boot:
+    admin:
+      client:
+        username: admin     #These two are needed so that the client
+        password: admin   #can register at the protected server api
+        instance:
+          metadata:
+            user.name: admin         #These two are needed so that the server
+            user.password: admin #can access the protected client endpoints
+
+
